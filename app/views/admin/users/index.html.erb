@@ -1,0 +1,8 @@
+<% provide :title, t("user.users_index") %>
+<h1><%= t "user.users_index" %></h1>
+<%= will_paginate %><br>
+<% @users.each do |user| %>
+  <%= link_to user.name, user %><br>
+  <%= user.email %><br>
+<% end %>
+<%= will_paginate %><br>

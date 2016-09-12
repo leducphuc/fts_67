@@ -12,3 +12,6 @@ en:
     content: "Contact the fts_67 team about the app at the"
   about:
     content: "This is the sample application for the training."
+  user:
+    user_nil: "User not found"
+    users_index: "Users Index"
