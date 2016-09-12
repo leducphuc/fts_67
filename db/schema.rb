@@ -92,11 +92,11 @@ ActiveRecord::Schema.define(version: 20160912061622) do
   create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "name"
     t.string   "email"
-    t.string   "password"
+    t.string   "password_digest"
     t.string   "avatar"
     t.boolean  "is_admin"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
   end
 
   add_foreign_key "activities", "users"

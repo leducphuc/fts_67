@@ -12,3 +12,9 @@ en:
     content: "Contact the fts_67 team about the app at the"
   about:
     content: "This is the sample application for the training."
+  signup:
+    submit: "Create my account"
+    welcome: "Welcome to to Training App!"
+  shared:
+    text: "The form contains"
+    error: "error"
