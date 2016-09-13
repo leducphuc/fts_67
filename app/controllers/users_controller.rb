@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
-  before_action :find_user, only: [:show]
+  before_action :logged_in_user, except: [:new, :create, :show]
+  before_action :find_user, except: [:new, :create, :index]
 
   def show
   end
@@ -11,7 +12,8 @@ class UsersController < ApplicationController
   def create
     @user = User.new user_params
     if @user.save
-      flash[:success] = t "signup.welcome"
+      log_in @user
+      flash[:success] = t "login.success"
       redirect_to @user
     else
       render :new
@@ -25,8 +27,8 @@ class UsersController < ApplicationController
   end
 
   def find_user
-    unless @user = User.find_by id: params[:id]
-      flash[:danger] = "user not found!"
+    unless @user = User.find_by(id: params[:id])
+      flash[:danger] = t "find_user.danger"
       redirect_to root_url
     end
   end
