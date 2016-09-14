@@ -21,9 +21,17 @@ en:
     danger: "Invalid email or password"
     account: "Account"
     success: "Signed in successfully."
+    submit: "Log in"
+  logged_in:
+    danger: "Please log in."
   find_user:
     danger: "User not found"
   logout:
     content: "Logout"
   remember_me:
     content: "Remember me"
+  edit:
+    content: "Edit user"
+    success: "Account updated successfully."
+    submit: "Save changes"
+    confirmation: "Confirmation"
