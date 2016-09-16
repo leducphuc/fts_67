@@ -12,7 +12,7 @@ class Exam < ApplicationRecord
 
   validates :subject_id, presence: true
 
-  def remaning_time
+  def remaining_time
     end_time_calculate unless end_time
     end_time - Time.now
   end

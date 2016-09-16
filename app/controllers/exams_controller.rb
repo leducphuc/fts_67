@@ -33,7 +33,10 @@ class ExamsController < ApplicationController
 
   def update
     if @exam.update_attributes exam_params
-      @exam.unchecked! if params[:submit] && @exam.testing?
+      if params[:finish] && @exam.testing?
+        @exam.unchecked!
+        @exam.spent_time = @exam.subject.duration * 60 - @exam.remaining_time
+      end
     else
       flash[:danger] = t "exam.invalid_update"
     end
