@@ -6,15 +6,17 @@
         <%= f.fields_for :choices do |builder| %>
           <%= render "choice", f: builder %>
         <% end %>
-        <%= f.submit t("exam.save_button"), id: "save",
-          class: "btn btn-primary" %>
-        <%= f.submit t("exam.submit_button"), name: "submit",
-          class: "btn btn-danger" %>
+        <% if @exam.testing? %>
+          <%= f.submit t("exam.save_button"), id: "save",
+            class: "btn btn-primary" %>
+          <%= f.submit t("exam.submit_button"), name: "finish",
+            class: "btn btn-danger" %>
+        <% end %>
       </ol>
     <% end %>
   </div>
-  <div class="col-md-4">
-    <div id="remaining-times"><%= @exam.remaning_time %></div>
+  <div class="col-md-4 col-md-offset-2">
+    <div id="remaining-times"><%= @exam.remaining_time %></div>
     <div class="countdown">
       <h1><%= t "clock.count_down" %></h1>
       <div id="clockdiv">
