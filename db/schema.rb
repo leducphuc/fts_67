@@ -12,92 +12,108 @@
 
 ActiveRecord::Schema.define(version: 20160912182841) do
 
-  create_table "activities", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.integer  "user_id"
-    t.integer  "action"
-    t.integer  "target_id"
+  create_table "activities", force: :cascade,
+    options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer "user_id"
+    t.integer "action"
+    t.integer "target_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_activities_on_user_id", using: :btree
   end
 
-  create_table "answers", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.string   "content"
-    t.boolean  "is_correct"
-    t.integer  "question_id"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
-    t.index ["question_id"], name: "index_answers_on_question_id", using: :btree
+  create_table "answers", force: :cascade,
+    options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string "content"
+    t.boolean "is_correct"
+    t.integer "question_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["question_id"], name: "index_answers_on_question_id",
+      using: :btree
   end
 
-  create_table "choices", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.integer  "exam_id"
-    t.integer  "question_id"
-    t.integer  "answer_id"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+  create_table "choices", force: :cascade,
+    options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer "exam_id"
+    t.integer "question_id"
+    t.integer "answer_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["answer_id"], name: "index_choices_on_answer_id", using: :btree
     t.index ["exam_id"], name: "index_choices_on_exam_id", using: :btree
-    t.index ["question_id"], name: "index_choices_on_question_id", using: :btree
+    t.index ["question_id"], name: "index_choices_on_question_id",
+      using: :btree
   end
 
-  create_table "exams", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.integer  "status"
-    t.float    "duration",   limit: 24
-    t.float    "spentTime",  limit: 24
-    t.integer  "score"
-    t.integer  "user_id"
-    t.integer  "subject_id"
-    t.datetime "created_at",            null: false
-    t.datetime "updated_at",            null: false
+  create_table "exams", force: :cascade,
+    options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer "status"
+    t.float "duration", limit: 24
+    t.float "spentTime", limit: 24
+    t.integer "score"
+    t.integer "user_id"
+    t.integer "subject_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["subject_id"], name: "index_exams_on_subject_id", using: :btree
     t.index ["user_id"], name: "index_exams_on_user_id", using: :btree
   end
 
-  create_table "questions", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.string   "content"
-    t.integer  "subject_id"
+  create_table "questions", force: :cascade,
+    options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string "content"
+    t.integer "subject_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["subject_id"], name: "index_questions_on_subject_id", using: :btree
+    t.index ["subject_id"], name: "index_questions_on_subject_id",
+      using: :btree
   end
 
-  create_table "subjects", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.string   "name"
-    t.text     "description", limit: 65535
-    t.datetime "created_at",                null: false
-    t.datetime "updated_at",                null: false
-  end
-
-  create_table "suggest_answers", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.string   "content"
-    t.boolean  "is_true"
-    t.integer  "suggest_question_id"
-    t.datetime "created_at",          null: false
-    t.datetime "updated_at",          null: false
-    t.index ["suggest_question_id"], name: "index_suggest_answers_on_suggest_question_id", using: :btree
-  end
-
-  create_table "suggest_questions", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.string   "content"
-    t.integer  "status"
-    t.integer  "subject_id"
-    t.integer  "user_id"
+  create_table "subjects", force: :cascade,
+    options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string "name"
+    t.float "duration", limit: 24
+    t.text "description", limit: 65535
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["subject_id"], name: "index_suggest_questions_on_subject_id", using: :btree
-    t.index ["user_id"], name: "index_suggest_questions_on_user_id", using: :btree
   end
 
-  create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.string   "name"
-    t.string   "email"
-    t.string   "password_digest"
-    t.string   "avatar"
-    t.boolean  "is_admin",        default: false
-    t.datetime "created_at",                      null: false
-    t.datetime "updated_at",                      null: false
-    t.string   "remember_digest"
+  create_table "suggest_answers", force: :cascade,
+    options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string "content"
+    t.boolean "is_true"
+    t.integer "suggest_question_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["suggest_question_id"],
+      name: "index_suggest_answers_on_suggest_question_id", using: :btree
+  end
+
+  create_table "suggest_questions", force: :cascade,
+    options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string "content"
+    t.integer "status"
+    t.integer "subject_id"
+    t.integer "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["subject_id"], name: "index_suggest_questions_on_subject_id",
+      using: :btree
+    t.index ["user_id"], name: "index_suggest_questions_on_user_id",
+      using: :btree
+  end
+
+  create_table "users", force: :cascade,
+    options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string "name"
+    t.string "email"
+    t.string "password_digest"
+    t.string "avatar"
+    t.boolean "is_admin", default: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "remember_digest"
   end
 
   add_foreign_key "activities", "users"

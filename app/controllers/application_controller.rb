@@ -5,13 +5,15 @@ class ApplicationController < ActionController::Base
   private
   def logged_in_user
     unless logged_in?
-      store_location
-      flash[:danger] = t "logged_in.danger"
+      flash[:danger] = t "flash.not_logged_in"
       redirect_to login_url
     end
   end
 
   def admin_user
-    redirect_to root_url unless current_user.is_admin?
+    unless current_user.is_admin?
+      flash[:danger] = t "flash.not_admin"
+      redirect_to root_url
+    end
   end
 end

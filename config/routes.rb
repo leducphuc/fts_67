@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  namespace :admin do
+    root "static_pages#home"
+    resources :subjects, only:[:new, :create]
+  end
   root "static_pages#home"
   get "/signup", to: "users#new"
   post "/signup", to: "users#create"
