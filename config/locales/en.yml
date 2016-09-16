@@ -51,3 +51,16 @@ en:
   flash:
     not_logged_in: "You are not log in."
     not_admin: "you are not admin."
+  delete:
+    content: "Delete"
+    confirm: "You sure?"
+  destroy:
+    success: "User deleted."
+    danger: "User can not delete."
+  index:
+    content: "All users"
+    header: "Users"
+  subject:
+    content: "Subjects"
+  find_subject:
+    danger: "Subject not found."

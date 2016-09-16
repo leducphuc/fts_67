@@ -1,8 +1,4 @@
 Rails.application.routes.draw do
-  namespace :admin do
-    root "static_pages#home"
-    resources :subjects, only:[:new, :create]
-  end
   root "static_pages#home"
   get "/signup", to: "users#new"
   post "/signup", to: "users#create"
@@ -13,5 +9,6 @@ Rails.application.routes.draw do
   resources :users
   namespace :admin do
     resources :users, only: [:index, :destroy, :show]
+    resources :subjects, only: [:index, :new, :create]
   end
 end
