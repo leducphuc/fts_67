@@ -43,3 +43,12 @@ en:
     not_found: "Exam Not Found!"
     save_button: "Save"
     submit_button: "Submit"
+  delete:
+    content: "Delete"
+    confirm: "You sure?"
+  destroy:
+    success: "User deleted."
+    danger: "User can not delete."
+  index:
+    content: "All users"
+    header: "Users"
