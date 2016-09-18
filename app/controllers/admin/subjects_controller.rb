@@ -1,5 +1,6 @@
 class Admin::SubjectsController < ApplicationController
   before_action :logged_in_user, :admin_user
+  before_action :find_subject, only: :destroy
 
   def index
     @subjects = Subject.paginate page: params[:page]
@@ -20,12 +21,23 @@ class Admin::SubjectsController < ApplicationController
     end
   end
 
+  def destroy
+    if @subject.destroy
+      flash[:success] = t "subject.success"
+      redirect_to admin_subjects_url
+    else
+      flash[:danger] = t "subject.danger"
+      redirect_to root_url
+    end
+  end
+
   private
   def subject_params
     params.require(:subject).permit :name, :duration, :description
+  end
 
   def find_subject
-    @subject = Subjects.find_by id: params[:id]
+    @subject = Subject.find_by id: params[:id]
     if @subject.nil?
       flash[:danger] = t "find_subject.danger"
       redirect_to root_url

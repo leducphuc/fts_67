@@ -62,5 +62,7 @@ en:
     header: "Users"
   subject:
     content: "Subjects"
+    success: "Subject deleted."
+    danger: "Subject can not delete."
   find_subject:
     danger: "Subject not found."
