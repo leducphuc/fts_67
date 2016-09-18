@@ -61,6 +61,7 @@ en:
     content: "All users"
     header: "Users"
   subject:
+    manager: "Subjects Manger"
     content: "Subjects"
   find_subject:
     danger: "Subject not found."
