@@ -1,6 +1,6 @@
 class Admin::SubjectsController < ApplicationController
   before_action :logged_in_user, :admin_user
-  before_action :find_subject, only: :destroy
+  before_action :find_subject, only: [:destroy, :edit, :update]
 
   def index
     @subjects = Subject.paginate page: params[:page]
@@ -18,6 +18,18 @@ class Admin::SubjectsController < ApplicationController
     else
       flash[:danger] = t "subject.fail"
       render :new
+    end
+  end
+
+  def edit
+  end
+
+  def update
+    if @subject.update_attributes subject_params
+      flash[:success] = t "subject.updated"
+      redirect_to admin_subjects_url
+    else
+      render :edit
     end
   end
 
