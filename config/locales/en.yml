@@ -48,6 +48,11 @@ en:
     success: "Create subject successfully."
     fail: "Create fail."
     submit: "Create Subject"
+    updated: "Subject updated successfully"
+    edit: "Edit subjects"
+    content: "Subjects"
+    success: "Subject deleted."
+    danger: "Subject can not delete."
   flash:
     not_logged_in: "You are not log in."
     not_admin: "you are not admin."
@@ -60,9 +65,5 @@ en:
   index:
     content: "All users"
     header: "Users"
-  subject:
-    content: "Subjects"
-    success: "Subject deleted."
-    danger: "Subject can not delete."
   find_subject:
     danger: "Subject not found."
