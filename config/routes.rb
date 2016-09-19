@@ -12,5 +12,6 @@ Rails.application.routes.draw do
     resources :users, only: [:index, :destroy, :show]
     resources :subjects
     resources :questions, only: :destroy
+    resources :suggest_questions, except: [:create, :edit]
   end
 end
