@@ -11,7 +11,7 @@ end
 Subject.create name: "English",
   description:"This is description"
 
-15.times do |n|
+80.times do |n|
   Question.create! content: "This is question #{n+1}",
     subject: Subject.find_by_id(1)
   5.times do |m|

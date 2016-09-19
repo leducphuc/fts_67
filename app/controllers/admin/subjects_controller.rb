@@ -1,9 +1,13 @@
 class Admin::SubjectsController < ApplicationController
-  before_action :logged_in_user, :admin_user
-  before_action :find_subject, only: [:destroy, :edit, :update]
+  before_action :logged_in_user, :verify_admin
+  before_action :find_subject, except: [:index, :new, :create]
 
   def index
     @subjects = Subject.paginate page: params[:page]
+  end
+
+  def show
+    @questions = @subject.questions.paginate page: params[:page]
   end
 
   def new
@@ -13,10 +17,10 @@ class Admin::SubjectsController < ApplicationController
   def create
     @subject = Subject.new subject_params
     if @subject.save
-      flash[:success] = t "subject.success"
-      redirect_to @subject
+      flash.now[:success] = t "subject.success"
+      render @subject
     else
-      flash[:danger] = t "subject.fail"
+      flash.now[:danger] = t "subject.fail"
       render :new
     end
   end

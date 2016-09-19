@@ -59,6 +59,7 @@ en:
   delete:
     content: "Delete"
     confirm: "You sure?"
+    danger: "Question can not delete"
   destroy:
     success: "User deleted."
     danger: "User can not delete."
@@ -67,3 +68,7 @@ en:
     header: "Users"
   find_subject:
     danger: "Subject not found."
+  question:
+    title: "Questions"
+    destroy_success: "question deleted."
+    nil: "question not present."

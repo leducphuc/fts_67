@@ -8,7 +8,9 @@ Rails.application.routes.draw do
   resources :exams, except: [:edit, :destroy]
   resources :users
   namespace :admin do
+    root "static_pages#home"
     resources :users, only: [:index, :destroy, :show]
     resources :subjects
+    resources :questions, only: :destroy
   end
 end
