@@ -16,4 +16,10 @@ class ApplicationController < ActionController::Base
       redirect_to root_url
     end
   end
+
+  def load_subjects
+    @subjects = Subject.all
+    @subjects_select =
+      @subjects.collect{|subject| [subject.name.capitalize, subject.id]}
+  end
 end
