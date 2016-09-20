@@ -3,8 +3,8 @@ User.create name: "Example User", email: "admin@admin.com",
 
 40.times do |n|
   name = "user#{n}"
-  email= "user#{n}@email.com"
-  password= "password"
+  email = "user#{n}@email.com"
+  password = "password"
   User.create name: name, email: email, password: password
 end
 
@@ -15,9 +15,21 @@ Subject.create name: "English",
   Question.create! content: "This is question #{n+1}",
     subject: Subject.find_by_id(1)
   5.times do |m|
-    is_correct= true if (m+1)%5 ==0
+    is_correct = true if (m+1)%5 == 0
     Answer.create! content: "This is answer #{(m+1)*(n+1)}",
       question: Question.find_by_id(n+1),
+      is_correct: is_correct
+  end
+end
+
+15.times do |n|
+  SuggestQuestion.create subject_id: 1,
+    user_id: 1,
+    content: "This is SuggestQuestion #{n}"
+  5.times do |m|
+    is_correct = true if (m+1)%5 == 0
+    SuggestAnswer.create content: "This is suggest answer #{(m+1)*(n+1)}",
+      suggest_question: SuggestQuestion.find_by_id(n+1),
       is_correct: is_correct
   end
 end

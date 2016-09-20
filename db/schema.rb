@@ -71,7 +71,7 @@ ActiveRecord::Schema.define(version: 20160912182841) do
 
   create_table "suggest_answers", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "content"
-    t.boolean  "is_true"
+    t.boolean  "is_correct"
     t.integer  "suggest_question_id"
     t.datetime "created_at",          null: false
     t.datetime "updated_at",          null: false
@@ -80,11 +80,11 @@ ActiveRecord::Schema.define(version: 20160912182841) do
 
   create_table "suggest_questions", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "content"
-    t.integer  "status"
+    t.integer  "status",     default: 0
     t.integer  "subject_id"
     t.integer  "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
     t.index ["subject_id"], name: "index_suggest_questions_on_subject_id", using: :btree
     t.index ["user_id"], name: "index_suggest_questions_on_user_id", using: :btree
   end
