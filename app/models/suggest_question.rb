@@ -2,22 +2,19 @@ class SuggestQuestion < ApplicationRecord
   belongs_to :subject
   belongs_to :user
 
-  has_many :suggest_answers, dependent: :destroy
+  has_many :answers, as: :answerable, dependent: :destroy
 
-  accepts_nested_attributes_for :suggest_answers
+  accepts_nested_attributes_for :answers
 
-  after_update :to_question
+  after_update :generate_question
 
   enum status: [:unapproved, :rejected, :approved]
 
   private
-  def to_question
-    if self.approved?
-      question = Question.new subject: self.subject, content: self.content
-      self.suggest_answers.each do |suggest_answer|
-        question.answers.build is_correct: suggest_answer.is_correct,
-          content: suggest_answer.content
-      end
+  def generate_question
+    if approved?
+      question = Question.new subject: subject, content: content
+      question.answers << answers
       question.save
     end
   end

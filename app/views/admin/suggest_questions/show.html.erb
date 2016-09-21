@@ -2,11 +2,11 @@
   <div class="col-md-4 col-md-offset-2">
     <%= @suggest_question.subject.name %>
     <%= @suggest_question.content %>
-    <% @suggest_question.suggest_answers.each do |suggest_answer| %>
+    <% @suggest_question.answers.each do |answer| %>
       <label>
-        <%= suggest_answer.content %>
-        <%= radio_button_tag suggest_answer.content, suggest_answer.id,
-          suggest_answer.is_correct?, disabled: true %>
+        <%= answer.content %>
+        <%= radio_button_tag answer.content, answer.id,
+          answer.is_correct?, disabled: true %>
       </label>
     <% end %>
     <% if @suggest_question.unapproved? %>

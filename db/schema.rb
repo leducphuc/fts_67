@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160912182841) do
+ActiveRecord::Schema.define(version: 20160921132458) do
 
   create_table "activities", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer  "user_id"
@@ -22,12 +22,13 @@ ActiveRecord::Schema.define(version: 20160912182841) do
   end
 
   create_table "answers", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.boolean  "is_correct",      default: false
     t.string   "content"
-    t.boolean  "is_correct",  default: false
-    t.integer  "question_id"
-    t.datetime "created_at",                  null: false
-    t.datetime "updated_at",                  null: false
-    t.index ["question_id"], name: "index_answers_on_question_id", using: :btree
+    t.string   "answerable_type"
+    t.integer  "answerable_id"
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
+    t.index ["answerable_type", "answerable_id"], name: "index_answers_on_answerable_type_and_answerable_id", using: :btree
   end
 
   create_table "choices", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -69,15 +70,6 @@ ActiveRecord::Schema.define(version: 20160912182841) do
     t.datetime "updated_at",                             null: false
   end
 
-  create_table "suggest_answers", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.string   "content"
-    t.boolean  "is_correct"
-    t.integer  "suggest_question_id"
-    t.datetime "created_at",          null: false
-    t.datetime "updated_at",          null: false
-    t.index ["suggest_question_id"], name: "index_suggest_answers_on_suggest_question_id", using: :btree
-  end
-
   create_table "suggest_questions", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "content"
     t.integer  "status",     default: 0
@@ -101,13 +93,11 @@ ActiveRecord::Schema.define(version: 20160912182841) do
   end
 
   add_foreign_key "activities", "users"
-  add_foreign_key "answers", "questions"
   add_foreign_key "choices", "exams"
   add_foreign_key "choices", "questions"
   add_foreign_key "exams", "subjects"
   add_foreign_key "exams", "users"
   add_foreign_key "questions", "subjects"
-  add_foreign_key "suggest_answers", "suggest_questions"
   add_foreign_key "suggest_questions", "subjects"
   add_foreign_key "suggest_questions", "users"
 end
