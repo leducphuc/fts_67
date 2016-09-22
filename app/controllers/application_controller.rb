@@ -19,7 +19,6 @@ class ApplicationController < ActionController::Base
 
   def load_subjects
     @subjects = Subject.all
-    @subjects_select =
-      @subjects.collect{|subject| [subject.name.capitalize, subject.id]}
+    @subjects_select = @subjects.collect{|subject| [subject.name, subject.id]}
   end
 end

@@ -12,7 +12,7 @@ Rails.application.routes.draw do
     root "static_pages#home"
     resources :users, only: [:index, :destroy, :show]
     resources :subjects
-    resources :questions, only: :destroy
+    resources :questions, only: [:destroy, :new, :create]
     resources :suggest_questions, except: [:create, :edit]
   end
 end

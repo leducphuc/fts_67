@@ -7,6 +7,3 @@ User.create name: "Example User", email: "admin@admin.com",
   password = "password"
   User.create name: name, email: email, password: password
 end
-
-Subject.create name: "English",
-  description:"This is description"
