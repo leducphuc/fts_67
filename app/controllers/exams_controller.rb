@@ -52,11 +52,6 @@ class ExamsController < ApplicationController
     end
   end
 
-  def load_subjects
-    @subjects = Subject.all
-    @subjects_select = @subjects.collect{|subject| [subject.name, subject.id]}
-  end
-
   def exam_params
     params.require(:exam).permit :subject_id,
       choices_attributes: [:id, :answer_id, :word_id]
