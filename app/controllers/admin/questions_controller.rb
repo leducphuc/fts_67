@@ -1,7 +1,7 @@
 class Admin::QuestionsController < ApplicationController
   before_action :logged_in_user, :verify_admin
-  before_action :find_question, only: [:destroy, :show]
-  before_action :load_subjects, only: [:new, :create]
+  before_action :find_question, except: [:new, :create]
+  before_action :load_subjects, only: [:new, :edit]
 
   def show
   end
@@ -9,16 +9,6 @@ class Admin::QuestionsController < ApplicationController
   def new
     @question = Question.new
     Settings.number_of_answers.times {@question.answers.build}
-  end
-
-  def destroy
-    if @question.destroy
-      flash[:success] = t "question.destroy_success"
-      redirect_to request.referrer || root_url
-    else
-      flash[:danger] = t "delete.danger"
-      redirect_to root_url
-    end
   end
 
   def create
@@ -31,6 +21,29 @@ class Admin::QuestionsController < ApplicationController
       load_subjects
       flash[:danger] = t "question.created_fail"
       render :new
+    end
+  end
+
+  def edit
+  end
+
+  def update
+    if @question.update_attributes question_params
+      flash[:success] = t "question.update_success"
+      redirect_to @question
+    else
+      load_subjects
+      render :edit
+    end
+  end
+
+  def destroy
+    if @question.destroy
+      flash[:success] = t "question.destroy_success"
+      redirect_to request.referrer || root_url
+    else
+      flash[:danger] = t "question.destroy_fail"
+      redirect_to root_url
     end
   end
 
