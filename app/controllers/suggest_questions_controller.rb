@@ -1,7 +1,17 @@
 class SuggestQuestionsController < ApplicationController
   before_action :logged_in_user
-  before_action :find_suggest_question, only: [:edit, :update]
-  before_action :load_subjects, except: [:index, :show, :destroy]
+  before_action :find_suggest_question, except: [:new, :create, :index]
+  before_action :correct_user, only: [:edit, :update, :destroy]
+  before_action :check_unapproved, except: [:new, :index, :create]
+  before_action :load_subjects, only: [:new, :edit, :show]
+
+  def show
+  end
+
+  def index
+    @suggest_questions = SuggestQuestion.paginate page: params[:page],
+      per_page: Settings.suggest_questions
+  end
 
   def new
     @suggest_question = SuggestQuestion.new
@@ -32,6 +42,16 @@ class SuggestQuestionsController < ApplicationController
     end
   end
 
+  def destroy
+    if @suggest_question.destroy
+      flash[:success] = t "suggest_question.update_success"
+      redirect_to suggest_questions_path
+    else
+      flash[:danger] = t "suggest_question.update_error"
+      redirect_to root_url
+    end
+  end
+
   private
   def suggest_question_params
     params.require(:suggest_question).permit :id, :content,:subject_id,
@@ -44,5 +64,15 @@ class SuggestQuestionsController < ApplicationController
       flash[:danger] = t "suggest_question.not_found"
       redirect_to suggest_questions_path
     end
+  end
+
+  def correct_user
+    unless current_user.current_user? @suggest_question.user
+      redirect_to root_url
+    end
+  end
+
+  def check_unapproved
+    redirect_to root_url if @suggest_question.approved?
   end
 end
