@@ -1,6 +1,7 @@
 class Admin::SuggestQuestionsController < ApplicationController
   before_action :logged_in_user, :verify_admin
   before_action :find_suggest_question, except: :index
+  before_action :correct_user, only: [:edit, :update]
 
   def index
     @suggest_questions = SuggestQuestion.paginate page: params[:page]
@@ -13,7 +14,7 @@ class Admin::SuggestQuestionsController < ApplicationController
     if @suggest_question.update_attributes status: params[:status]
       flash[:success] = t "suggest_question.update_success"
     else
-      flash[:danger] = t "suggest_question.udate_error"
+      flash[:danger] = t "suggest_question.update_error"
     end
     redirect_to admin_suggest_questions_path
   end
@@ -34,5 +35,9 @@ class Admin::SuggestQuestionsController < ApplicationController
       flash[:danger] = t "find_suggest.danger"
       redirect_to admin_suggest_questions_path
     end
+  end
+
+  def correct_user
+    redirect_to root_url unless current_user.current_user? @user
   end
 end
