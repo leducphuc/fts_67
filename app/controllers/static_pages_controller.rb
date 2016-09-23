@@ -2,7 +2,7 @@ class StaticPagesController < ApplicationController
   before_action :logged_in_user
   before_action :load_subjects
 
-  def home
+  def index
     @exams = current_user.exams.order updated_at: :desc
     @exam = Exam.new
     @suggest_questions = current_user.suggest_questions.order updated_at: :desc

@@ -32,7 +32,7 @@ class Admin::QuestionsController < ApplicationController
   def update
     if @question.update_attributes question_params
       flash[:success] = t "question.update_success"
-      redirect_to admin_question_path
+      redirect_to admin_question_path @question
     else
       load_subjects
       render :show

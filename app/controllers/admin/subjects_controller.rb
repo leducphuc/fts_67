@@ -4,11 +4,12 @@ class Admin::SubjectsController < ApplicationController
 
   def index
     @subjects = Subject.paginate page: params[:page],
-      per_page: Settings.subjects
+      per_page: Settings.questions
   end
 
   def show
-    @questions = @subject.questions.paginate page: params[:page]
+    @questions = @subject.questions.paginate page: params[:page],
+      per_page: Settings.questions
   end
 
   def new
