@@ -10,7 +10,7 @@
       </label>
     <% end %>
     <% if @suggest_question.unapproved? %>
-      <%= link_to t("suggest_question.approve"), 
+      <%= link_to t("suggest_question.approve"),
         {status: "approved"}, method: :put, class: "btn btn-success" %>
       <%= link_to t("suggest_question.reject"),
         {status: "rejected"}, method: :put, class: "btn btn-default" %>
