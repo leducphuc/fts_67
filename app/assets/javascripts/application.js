@@ -15,10 +15,10 @@
 //= require bootstrap
 //= require turbolinks
 //= require_tree .
-
 function remove_fields(link) {
   $(link).prev('input[type=hidden]').val('1');
   $(link).closest('#ham').hide();
+  $(link).closest('#answer_fields').hide();
 }
 
 function add_fields(link, association, content) {
