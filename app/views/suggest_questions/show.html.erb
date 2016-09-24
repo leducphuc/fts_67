@@ -3,7 +3,7 @@
     <%= form_for @suggest_question do |f| %>
       <%= render "shared/error_messages", object: @suggest_question %>
 
-      <%= render "suggest_question", f: f %>
+      <%= render "suggest_question_fields", f: f %>
 
       <%= f.submit t("edit.submit"), class: "btn btn-primary" %>
 

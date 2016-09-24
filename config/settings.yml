@@ -3,6 +3,10 @@ exams_perpage: 15
 size: 50
 number_of_answers: 2
 minimum_answer: 2
-suggest_questions: 10
+suggest_question: 10
+exams: 10
 users: 15
 subjects: 10
+questions: 10
+length: 35
+duration: 20

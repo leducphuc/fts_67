@@ -1,0 +1,8 @@
+<% provide :title, t("question.index") %>
+<h1><%= t "question.index" %></h1>
+<% @questions.each do |question| %>
+  <div>
+    <span><%= link_to question.content, admin_question_path(question) %></span>
+  </div>
+<% end %>
+<%= will_paginate %>

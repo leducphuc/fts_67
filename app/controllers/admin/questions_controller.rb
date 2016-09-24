@@ -1,9 +1,14 @@
 class Admin::QuestionsController < ApplicationController
   before_action :logged_in_user, :verify_admin
-  before_action :find_question, except: [:new, :create]
-  before_action :load_subjects, only: [:new, :edit]
+  before_action :find_question, except: [:new, :create, :index]
+  before_action :load_subjects, only: [:new, :edit, :show]
 
   def show
+  end
+
+  def index
+    @questions = Question.paginate page: params[:page],
+      per_page: Settings.questions
   end
 
   def new
@@ -16,7 +21,7 @@ class Admin::QuestionsController < ApplicationController
     if @question.save
       @subject = @question.subject
       flash[:success] = t "question.created_success"
-      redirect_to admin_subject_path @subject
+      redirect_to admin_question_path @question
     else
       load_subjects
       flash[:danger] = t "question.created_fail"
@@ -24,23 +29,20 @@ class Admin::QuestionsController < ApplicationController
     end
   end
 
-  def edit
-  end
-
   def update
     if @question.update_attributes question_params
       flash[:success] = t "question.update_success"
-      redirect_to @question
+      redirect_to admin_question_path
     else
       load_subjects
-      render :edit
+      render :show
     end
   end
 
   def destroy
     if @question.destroy
       flash[:success] = t "question.destroy_success"
-      redirect_to request.referrer || root_url
+      redirect_to admin_questions_path
     else
       flash[:danger] = t "question.destroy_fail"
       redirect_to root_url
@@ -49,8 +51,8 @@ class Admin::QuestionsController < ApplicationController
 
   private
   def question_params
-    params.require(:question).permit :content, :subject_id,
-      answers_attributes: [:content, :is_correct, :_destroy]
+    params.require(:question).permit :id, :content, :subject_id,
+      answers_attributes: [:id, :content, :is_correct, :_destroy]
   end
 
   def find_question

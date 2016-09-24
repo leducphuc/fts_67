@@ -7,7 +7,7 @@ class SessionsController < ApplicationController
     if user
       log_in user
       params[:session][:remember_me] ? user.remember : user.forget
-      redirect_back_or user
+      user.is_admin? ? redirect_to(admin_home_path) : redirect_back_or(user)
     else
       flash.now[:danger] = t "login.danger"
       render :new
