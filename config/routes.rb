@@ -14,5 +14,6 @@ Rails.application.routes.draw do
     resources :subjects
     resources :questions
     resources :suggest_questions, except: [:create, :edit]
+    resources :exams, only: [:index, :show, :update]
   end
 end

@@ -50,6 +50,7 @@ en:
     score: "Score"
     date: "Date"
     status: "Status"
+    admin_check: "Check this exam"
   subject:
     title: "Add a Subject"
     success: "Create subject successfully."

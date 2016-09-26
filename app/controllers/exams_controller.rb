@@ -25,6 +25,10 @@ class ExamsController < ApplicationController
   def show
     @exam = Exam.includes(choices: [{question: :answers},
       :answer]).find_by_id params[:id]
+    if @exam.nil?
+      flash[:danger] = t"exam.not_found"
+      redirect_to exams_path
+    end
     if @exam.start?
       time = Time.now + @exam.subject.duration * 60
       @exam.update_attributes status: 1, end_time: time
@@ -35,7 +39,6 @@ class ExamsController < ApplicationController
     if @exam.update_attributes exam_params
       if params[:finish] && @exam.testing?
         @exam.unchecked!
-        @exam.spent_time = @exam.subject.duration * 60 - @exam.remaining_time
       end
     else
       flash[:danger] = t "exam.invalid_update"
@@ -54,6 +57,6 @@ class ExamsController < ApplicationController
 
   def exam_params
     params.require(:exam).permit :subject_id,
-      choices_attributes: [:id, :answer_id, :word_id]
+      choices_attributes: [:id, :answer_id, :question_id]
   end
 end
