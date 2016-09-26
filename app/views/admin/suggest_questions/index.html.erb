@@ -1,3 +1,13 @@
+<%= form_tag admin_suggest_questions_path, :method => 'get' do %>
+  <p>
+    <%= hidden_field_tag :class_name, @class_name %>
+    <%= select_tag :subject_id, options_for_select(@subjects_select) %>
+    <%= select_tag :status, options_for_select(@status_select) %>
+    <%= date_select :create_at, order: [:day, :month, :year] %>
+    <%= text_field_tag :search, params[:search] %>
+    <%= submit_tag "Search", :name => nil %>
+  </p>
+<% end %>
 <% @suggest_questions.each do |suggest_question| %>
   <div>
     <span><%= link_to suggest_question.subject.name,

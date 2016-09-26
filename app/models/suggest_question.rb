@@ -8,6 +8,20 @@ class SuggestQuestion < ApplicationRecord
 
   enum status: [:unapproved, :rejected, :approved]
 
+  class << self
+    def search(params)
+      if params
+        where("subject_id = :subject_id AND content LIKE :content_part
+          AND status= :status",
+          {subject_id: params[:subject_id],
+          content_part: "%#{params[:search]}%",
+          status: params[:status]})
+      else
+        all
+      end
+    end
+  end
+
   private
   def generate_question
     if approved?

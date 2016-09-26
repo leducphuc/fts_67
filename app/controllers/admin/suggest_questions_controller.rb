@@ -1,10 +1,15 @@
 class Admin::SuggestQuestionsController < ApplicationController
+  include SearchConcern
+
   before_action :logged_in_user, :verify_admin
   before_action :find_suggest_question, except: :index
+  before_action :load_subjects, only: :index
+  before_action :load_statuses, only: :index
 
   def index
-    @suggest_questions = SuggestQuestion.paginate page: params[:page],
-      per_page: Settings.suggest_questions
+    @class_name = "SuggestQuestion"
+    @suggest_questions = SuggestQuestion.search(search_params)
+      .paginate page: params[:page], per_page: Settings.suggest_questions
   end
 
   def show
@@ -36,4 +41,15 @@ class Admin::SuggestQuestionsController < ApplicationController
       redirect_to admin_suggest_questions_path
     end
   end
+  
+  def search_params
+    params.permit(:subject_id, :search, :status, :class_name)
+  end
+
+  def load_statuses
+    @status_select = 
+      SuggestQuestion.statuses.map{|key, value|
+      [I18n.t("suggest_question_status.#{key}"), value]}
+  end
+
 end

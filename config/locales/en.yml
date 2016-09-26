@@ -120,3 +120,13 @@ en:
   check_true: "Check if answer is true"
   answer_size: "should has more than 2 answers."
   remove: "Remove"
+  exam_status:
+    start: "Start"
+    testing: "Testing"
+    unchecked: "Unchecked"
+    checked: "Checked"
+  suggest_question_status:
+    unapproved: "Unapproved"
+    rejected: "Rejected"
+    approved: "Approved"
+
