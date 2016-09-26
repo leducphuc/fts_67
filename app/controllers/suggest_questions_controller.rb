@@ -29,16 +29,13 @@ class SuggestQuestionsController < ApplicationController
     end
   end
 
-  def edit
-  end
-
   def update
     if @suggest_question.update_attributes suggest_question_params
       flash[:success] = t "suggest_question.update_success"
       redirect_to @suggest_question
     else
       load_subjects
-      render :edit
+      render :show
     end
   end
 

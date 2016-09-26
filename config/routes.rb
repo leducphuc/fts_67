@@ -9,7 +9,7 @@ Rails.application.routes.draw do
   resources :suggest_questions
   resources :users
   namespace :admin do
-    root "static_pages#home"
+    root "static_pages#home", as: :home
     resources :users, only: [:index, :destroy, :show]
     resources :subjects
     resources :questions

@@ -4,7 +4,7 @@
   <%= f.text_field :content %>
   <h2><%= t "answer.content" %></h2>
   <%= f.fields_for :answers do |builder| %>
-    <%= render "answer", f: builder %>
+    <%= render "answer_fields", f: builder %>
   <% end %>
-  <%= link_to_add_answers t("answer.add"), f, :answers %>
+  <%= link_to_add_fields t("answer.add"), f, :answers %>
 </fieldset>
