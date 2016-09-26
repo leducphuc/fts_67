@@ -4,12 +4,11 @@ module CheckValidations extend ActiveSupport::Concern
 
     has_many :answers, as: :answerable, dependent: :destroy
 
+    validate :check_before_delete
     validates :content, presence: true
     validate :check_correct_answer
     validates :answers, length: {minimum: Settings.minimum_answer,
       message: I18n.t("answer.valid")}
-
-    before_update :check_correct_answer
 
     accepts_nested_attributes_for :answers, allow_destroy: true,
       reject_if: proc {|attributes| attributes[:content].blank?}
@@ -19,6 +18,14 @@ module CheckValidations extend ActiveSupport::Concern
       correct_answer = answers.select {|answer| answer.is_correct?}
       errors.add :correct_answer,
         I18n.t("answer.must_check") if correct_answer.empty?
+    end
+
+    def check_before_delete
+      answers.each do |answer|
+        if answer.is_correct? && answer.marked_for_destruction?
+          errors.add :correct_answer, I18n.t("answer.must_check")
+        end
+      end
     end
   end
 end
