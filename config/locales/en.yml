@@ -104,7 +104,7 @@ en:
     create_error: "Suggest question has not been created!"
     create_success: "Suggest question created successfully!"
     title: "Suggest Question"
-    submit: "Create suggestion"
+    submit: "Create Suggest Question"
     edit: "Edit"
     index: "All suggest question"
     subject: "Subject"
@@ -120,3 +120,4 @@ en:
   check_true: "Check if answer is true"
   answer_size: "should has more than 2 answers."
   remove: "Remove"
+  close: "Close"

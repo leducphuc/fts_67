@@ -25,4 +25,13 @@ function add_fields(link, association, content) {
   var new_id = new Date().getTime();
   var regexp = new RegExp('new_' + association, 'g')
   $(link).before(content.replace(regexp, new_id));
+  $('input[type="radio"]').on('click', function() {
+    $('input[type="radio"]').not(this).prop('checked', false);
+  })
 }
+
+document.addEventListener('turbolinks:load', function() {
+  $('input[type="radio"]').on('click', function() {
+    $('input[type="radio"]').not(this).prop('checked', false);
+  })
+})

@@ -51,7 +51,7 @@ class SuggestQuestionsController < ApplicationController
 
   private
   def suggest_question_params
-    params.require(:suggest_question).permit :id, :content,:subject_id,
+    params.require(:suggest_question).permit :content,:subject_id,
       answers_attributes: [:id, :content, :is_correct, :_destroy]
   end
 
