@@ -35,6 +35,7 @@ ActiveRecord::Schema.define(version: 20160921132458) do
     t.integer  "exam_id"
     t.integer  "question_id"
     t.integer  "answer_id"
+    t.boolean  "is_correct"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
     t.index ["exam_id"], name: "index_choices_on_exam_id", using: :btree

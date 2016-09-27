@@ -4,6 +4,7 @@ class CreateChoices < ActiveRecord::Migration[5.0]
       t.references :exam, foreign_key: true
       t.references :question, foreign_key: true
       t.integer :answer_id
+      t.boolean :is_correct
 
       t.timestamps
     end
