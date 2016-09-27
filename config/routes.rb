@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  root "static_pages#home"
+  root "static_pages#index"
   get "/signup", to: "users#new"
   post "/signup", to: "users#create"
   get "/login", to: "sessions#new"
@@ -9,7 +9,7 @@ Rails.application.routes.draw do
   resources :suggest_questions
   resources :users
   namespace :admin do
-    root "static_pages#home", as: :home
+    root "static_pages#index", as: :home
     resources :users, only: [:index, :destroy, :show]
     resources :subjects
     resources :questions

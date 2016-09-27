@@ -1,0 +1,7 @@
+<% if @questions.any? %>
+  <ol class="questions">
+    <li>
+      <%= link_to question.content, admin_question_path(question) %><br>
+    </li>
+  </ol>
+<% end %>
