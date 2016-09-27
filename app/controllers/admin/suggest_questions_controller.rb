@@ -1,6 +1,4 @@
 class Admin::SuggestQuestionsController < ApplicationController
-  include SearchConcern
-
   before_action :logged_in_user, :verify_admin
   before_action :find_suggest_question, except: :index
   before_action :load_subjects, only: :index

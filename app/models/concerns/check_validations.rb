@@ -20,5 +20,15 @@ module CheckValidations extend ActiveSupport::Concern
       errors.add :correct_answer,
         I18n.t("answer.must_check") if correct_answer.empty?
     end
+
+    def generate_activity_for_create
+    end
+
+    def generate_activity_for_update
+    end
+
+    def generate_acitivty_for_destroy
+      byebug
+    end
   end
 end

@@ -1,5 +1,8 @@
 class SuggestQuestion < ApplicationRecord
+  attr_accessor :actor_id
+
   include CheckValidations
+
   belongs_to :user
 
   validates :user_id, presence: true

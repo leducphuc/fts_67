@@ -129,4 +129,6 @@ en:
     unapproved: "Unapproved"
     rejected: "Rejected"
     approved: "Approved"
+  activity:
+    object: "User %{name}, has been %{action} %{object_class} %{object_id}"
 

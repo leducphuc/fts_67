@@ -14,10 +14,13 @@ ActiveRecord::Schema.define(version: 20160921132458) do
 
   create_table "activities", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer  "user_id"
+    t.string   "activable_type"
+    t.integer  "activable_id"
     t.integer  "action"
     t.integer  "target_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+    t.index ["activable_type", "activable_id"], name: "index_activities_on_activable_type_and_activable_id", using: :btree
     t.index ["user_id"], name: "index_activities_on_user_id", using: :btree
   end
 
