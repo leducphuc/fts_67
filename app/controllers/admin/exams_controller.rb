@@ -3,7 +3,7 @@ class Admin::ExamsController < ApplicationController
 
   def index
     @exams = Exam.paginate page: params[:page],
-      perpage: Settings.exams_perpage
+      per_page: Settings.exams_perpage
   end
 
   def show
@@ -18,12 +18,13 @@ class Admin::ExamsController < ApplicationController
   def update
     if @exam.update_attributes exam_params
       @exam.checked!
-      flash[:sucess] = t "exam.checked"
+      flash.now[:sucess] = t "exam.checked"
     else
-      flash[:danger] = t "exam.not_checked"
+      flash.now[:danger] = t "exam.not_checked"
     end
     redirect_to admin_exams_path
   end
+
 
   private
   def find_exam
