@@ -1,8 +1,34 @@
-<% provide :title, t("index.content") %>
-<h1><%= t "index.content" %></h1>
-
-<%= will_paginate %>
-<ul class="users">
-  <%= render @users %>
-</ul>
+<% provide :title, t("user.all") %>
+<h1><%= t "user.all" %></h1>
+<table class="table sortable table-bordered">
+  <thead>
+    <tr>
+      <th><%= t "user.id" %></th>
+      <th></th>
+      <th><%= t "user.name" %></th>
+      <th><%= t "user.email" %></th>
+      <th><%= t "user.created_at" %></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @users.each do |user| %>
+      <tr>
+        <td><%= user.id %></td>
+        <td><%= gravatar_for user, size: Settings.size %></td>
+        <td><%= link_to user.name, user %></td>
+        <td><%= user.email %></td>
+        <td><%= user.created_at.strftime t(:time) %></td>
+        <td>
+          <% unless current_user.current_user?(user) %>
+            <%= link_to t("delete.content"), [:admin, user], method: :delete,
+              data: {confirm: t("delete.confirm")},
+              class: "btn btn-danger btn-xs glyphicon glyphicon-remove" %>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+  <%= will_paginate %>
+</table>
 <%= will_paginate %>

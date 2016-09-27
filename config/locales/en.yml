@@ -53,6 +53,7 @@ en:
     admin_check: "Check this exam"
     checked: "Checked"
     not_checked: "Unchecked"
+    created_at: "Created at"
   subject:
     title: "Add a Subject"
     success: "Create subject successfully."
@@ -63,7 +64,11 @@ en:
     content: "Subjects"
     success: "Subject deleted."
     danger: "Subject can not delete."
-    duration: "Duration: "
+    duration: "Duration "
+    all: "All Subjects"
+    name: "Subject"
+    description: "Description"
+    id: "ID"
   flash:
     not_logged_in: "You are not log in."
     not_admin: "you are not admin."
@@ -74,7 +79,6 @@ en:
     success: "User deleted."
     danger: "User can not delete."
   index:
-    content: "All users"
     header: "Users"
   find_subject:
     danger: "Subject not found."
@@ -127,3 +131,10 @@ en:
   close: "Close"
   admin: "Administrator"
   manage: "Systems management"
+  user:
+    name: "User name"
+    email: "Email"
+    id: "ID"
+    all: "All Users"
+    created_at: "Created at"
+  time: "%Y/%m/%d %H:%M"

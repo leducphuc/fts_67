@@ -1,8 +1,29 @@
-<% provide :title, t("subject.content") %>
-<h1><%= t "subject.content" %></h1>
-
-<%= will_paginate %>
-<ul class="subjects">
-  <%= render @subjects %>
-</ul>
+<% provide :title, t("subject.all") %>
+<h1><%= t "subject.all" %></h1><br>
+<table class="table sortable table-bordered">
+  <thead>
+    <tr>
+      <th><%= t "subject.id "%></th>
+      <th><%= t "subject.name" %></th>
+      <th><%= t "subject.duration" %></th>
+      <th><%= t "subject.description" %></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @subjects.each do |subject| %>
+      <tr>
+        <td><%= subject.id %></td>
+        <td><%= link_to subject.name, admin_subject_path(subject) %></td>
+        <td><%= subject.duration %></td>
+        <td><%= subject.description %></td>
+        <td>
+          <%= link_to t("delete.content"), [:admin, subject],
+            method: :delete, data: {confirm: t("delete.confirm")},
+            class: "btn btn-danger btn-xs glyphicon glyphicon-remove" %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
 <%= will_paginate %>

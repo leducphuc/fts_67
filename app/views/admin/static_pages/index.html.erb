@@ -12,6 +12,7 @@
       <table class="table sortable table-striped table-condensed">
         <thead>
           <tr>
+            <th><%= t "exam.created_at" %></th>
             <th><%= t "exam.subject" %></th>
             <th><%= t "exam.status" %></th>
             <th><%= t "exam.duration" %></th>
@@ -23,6 +24,7 @@
         <tbody>
           <% @exams.each do |exam| %>
             <tr>
+              <td><%= exam.created_at.strftime t(:time) %></td>
               <td><%= link_to exam.subject.name, admin_exam_path(exam) %></td>
               <td><%= exam.status %></td>
               <td><%= Settings.duration %></td>
@@ -58,40 +60,6 @@
           <% end %>
         </tbody>
       </table>
-      <button type="button" class="btn btn-primary" data-amount="30"
-        data-toggle="modal" data-target="#question_popup">
-        <%= t "suggest_question.submit" %>
-      </button>
-      <div id="question_popup" class="modal fade" role="dialog">
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <button type="button" class="close" data-dismiss="modal">
-                &times;
-              </button>
-              <h4 class="modal-title"><%= t "suggest_question.submit" %></h4>
-            </div>
-            <div class="modal-body">
-              <%= form_for @suggest_question do |f| %>
-                <%= render "shared/error_messages",
-                  object: @suggest_question %>
-
-                <%= render "suggest_questions/suggest_question_fields",
-                  f: f %>
-
-                <%= f.submit t("suggest_question.submit"),
-                  class: "btn btn-primary" %>
-              <% end %>
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-default"
-                data-dismiss="modal">
-                <%= t :close %>
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
     </div>
   </div>
 </div>
