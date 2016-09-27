@@ -1,6 +1,25 @@
-<% @suggest_questions.each do |suggest_question| %>
-  <div>
-    <span><%= link_to suggest_question.subject.name,
-      admin_suggest_question_path(suggest_question) %></span>
-  </div>
-<% end %>
+<div class="mygrid-wrapper-div ">
+  <table class="table sortable table-striped table-condensed">
+    <thead>
+      <tr>
+        <th><%= t "suggest_question.subject" %></th>
+        <th><%= t "suggest_question.content" %></th>
+        <th><%= t "suggest_question.status" %></th>
+        <th><%= t "suggest_question.date" %></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @suggest_questions.each do |suggest_question| %>
+        <tr>
+          <td><%= suggest_question.subject.name %></td>
+          <td><%= link_to truncate(suggest_question.content,
+            length: Settings.length),
+            admin_suggest_question_path(suggest_question) %>
+          </td>
+          <td><%= suggest_question.status %></td>
+          <td><%= suggest_question.created_at %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

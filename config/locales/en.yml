@@ -51,6 +51,8 @@ en:
     date: "Date"
     status: "Status"
     admin_check: "Check this exam"
+    checked: "Checked"
+    not_checked: "Unchecked"
   subject:
     title: "Add a Subject"
     success: "Create subject successfully."

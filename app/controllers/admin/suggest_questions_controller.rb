@@ -3,7 +3,7 @@ class Admin::SuggestQuestionsController < ApplicationController
   before_action :find_suggest_question, except: :index
 
   def index
-    @suggest_questions = SuggestQuestion.paginate page: params[:page],
+    @suggest_questions = SuggestQuestion.unapproved.paginate page: params[:page],
       per_page: Settings.suggest_questions
   end
 
@@ -12,18 +12,18 @@ class Admin::SuggestQuestionsController < ApplicationController
 
   def update
     if @suggest_question.update_attributes status: params[:status]
-      flash[:success] = t "suggest_question.update_success"
+      flash.now[:success] = t "suggest_question.update_success"
     else
-      flash[:danger] = t "suggest_question.update_error"
+      flash.now[:danger] = t "suggest_question.update_error"
     end
     redirect_to admin_suggest_questions_path
   end
 
   def destroy
     if @suggest_question.destroy
-      flash[:success] = t "suggest_question.update_success"
+      flash.now[:success] = t "suggest_question.update_success"
     else
-      flash[:danger] = t "suggest_question.update_error"
+      flash.now[:danger] = t "suggest_question.update_error"
     end
     redirect_to admin_suggest_questions_path
   end
