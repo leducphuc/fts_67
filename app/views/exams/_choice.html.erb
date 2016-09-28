@@ -1,7 +1,7 @@
 <%= f.label f.object.question.content %>
 <% f.object.question.answers.each do |answer| %>
-  <div class="row", id="choice--<%= answer == f.object.answer %>--<%= 
-  f.object.answer.is_correct? if f.object.answer %>">
+  <div class="row" id="choice--<%= answer == f.object.answer %>--<%=
+    f.object.is_correct? if f.object.is_correct %>">
     <div class="col-md-2">
       <%= f.radio_button :answer_id, answer.id,
         checked: answer == f.object.answer,

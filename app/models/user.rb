@@ -1,7 +1,5 @@
 class User < ApplicationRecord
-  attr_accessor :remember_token
-
-  has_many :activitys, dependent: :destroy
+  has_many :activities, dependent: :destroy
   has_many :exams, dependent: :destroy
   has_many :suggest_questions, dependent: :destroy
 
@@ -25,6 +23,12 @@ class User < ApplicationRecord
     def new_token
       SecureRandom.urlsafe_base64
     end
+  end
+
+  def generate_activity action, target_object
+    activity = activities.new activable_type: target_object.class,
+      activable_id: target_object.id, action: action
+    activity.save
   end
 
   def remember

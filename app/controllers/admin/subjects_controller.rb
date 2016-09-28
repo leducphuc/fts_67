@@ -18,6 +18,7 @@ class Admin::SubjectsController < ApplicationController
 
   def create
     @subject = Subject.new subject_params
+    current_user.generate_activity "created", @subject
     if @subject.save
       flash.now[:success] = t "subject.success"
       render @subject
@@ -32,6 +33,7 @@ class Admin::SubjectsController < ApplicationController
 
   def update
     if @subject.update_attributes subject_params
+      current_user.generate_activity "updated", @subject
       flash[:success] = t "subject.updated"
       redirect_to admin_subjects_url
     else
@@ -41,6 +43,7 @@ class Admin::SubjectsController < ApplicationController
 
   def destroy
     if @subject.destroy
+      current_user.generate_activity "deleted", @subject
       flash[:success] = t "subject.success"
       redirect_to admin_subjects_url
     else

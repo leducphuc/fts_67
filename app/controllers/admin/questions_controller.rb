@@ -20,6 +20,7 @@ class Admin::QuestionsController < ApplicationController
     @question = Question.new question_params
     if @question.save
       @subject = @question.subject
+      current_user.generate_activity "created", @question
       flash[:success] = t "question.created_success"
       redirect_to admin_question_path @question
     else
@@ -31,6 +32,7 @@ class Admin::QuestionsController < ApplicationController
 
   def update
     if @question.update_attributes question_params
+      current_user.generate_activity "updated", @question
       flash[:success] = t "question.update_success"
       redirect_to admin_question_path @question
     else
@@ -41,6 +43,7 @@ class Admin::QuestionsController < ApplicationController
 
   def destroy
     if @question.destroy
+      current_user.generate_activity "deleted", @question
       flash[:success] = t "question.destroy_success"
       redirect_to admin_questions_path
     else

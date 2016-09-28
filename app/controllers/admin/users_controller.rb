@@ -11,6 +11,7 @@ class Admin::UsersController < ApplicationController
 
   def destroy
     if @user.destroy
+      current_user.generate_activity "deleted", @user
       flash[:success] = t "destroy.success"
       redirect_to admin_users_url
     else
