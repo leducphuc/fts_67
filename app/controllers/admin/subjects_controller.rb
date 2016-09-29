@@ -1,15 +1,24 @@
 class Admin::SubjectsController < ApplicationController
   before_action :logged_in_user, :verify_admin
   before_action :find_subject, except: [:index, :new, :create]
+  before_action :load_subjects, only: :index
 
   def index
-    @subjects = Subject.paginate page: params[:page],
-      per_page: Settings.questions
+    @subject = if params[:find]
+      Subject.search(search_params)
+        .paginate page: params[:page], per_page: Settings.subjects
+    else
+      Subject.all
+    end
   end
 
   def show
-    @questions = @subject.questions.paginate page: params[:page],
-      per_page: Settings.questions
+    @questions = if params[:find]
+      @subject.questions.search(search_params)
+        .paginate page: params[:page], per_page: Settings.questions
+    else
+      @subject.questions.all
+    end
   end
 
   def new
@@ -55,6 +64,10 @@ class Admin::SubjectsController < ApplicationController
   private
   def subject_params
     params.require(:subject).permit :name, :duration, :description
+  end
+
+  def search_params
+    params.permit :subject_id, :search
   end
 
   def find_subject

@@ -21,8 +21,10 @@ module CheckValidations extend ActiveSupport::Concern
     end
 
     def check_before_delete
+      correct_answer = answers.select {|answer| answer.is_correct?}.size
       answers.each do |answer|
-        if answer.is_correct? && answer.marked_for_destruction?
+        if answer.is_correct? && answer.marked_for_destruction? &&
+          correct_answer < 2
           errors.add :correct_answer, I18n.t("answer.must_check")
         end
       end

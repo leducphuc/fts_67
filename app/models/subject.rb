@@ -6,4 +6,8 @@ class Subject < ApplicationRecord
 
   validates :name, presence: true, uniqueness: true, length: {minimum: 6}
   validates :duration, numericality: true
+
+  scope :search, -> params {
+    where("name LIKE :name_part", {name_part: "%#{params[:search]}%"})
+  }
 end
