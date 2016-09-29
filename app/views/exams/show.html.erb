@@ -20,7 +20,8 @@
     <div id="remaining-times"><%= @exam.remaining_time %></div>
     <div id="spent-time"><%= @exam.spent_time if @exam.spent_time %></div>
     <div class="countdown">
-      <h1><%= t "clock.count_down" %></h1>
+      <h1><%= @exam.spent_time.nil? ? t("clock.count_down") :
+        t("clock.spent_time") %></h1>
       <div id="clockdiv">
         <div>
           <span class="minutes"></span>

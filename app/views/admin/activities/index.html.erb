@@ -1,8 +1,7 @@
 <% @activities.each do |activity| %>
   <% if activity.deleted? %>
-    <%= activity.user.name %>
+    <%= activity.description %>
   <% else %>
-    <%= link_to activity.user.name, [:admin, activity.activable] %>
+    <%= link_to activity.description, [:admin, activity.activable] %>
   <% end %>
 <% end %>
-<%= will_paginate %>

@@ -6,10 +6,10 @@ class Admin::SuggestQuestionsController < ApplicationController
 
   def index
     @suggest_questions = if params[:find]
-      SuggestQuestion.search(search_params)
+      SuggestQuestion.search(search_params).includes(:subject)
         .paginate page: params[:page], per_page: Settings.suggest_questions
     else
-      SuggestQuestion.all
+      SuggestQuestion.all.includes(:subject)
     end
   end
 

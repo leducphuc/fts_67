@@ -11,7 +11,7 @@ class Admin::ExamsController < ApplicationController
       question: :answers]).find_by_id params[:id]
     if @exam.nil?
       flash[:danger] = t "exam.not_found"
-      redirect_to admin_exams_path
+      redirect_to admin_home_path
     end
   end
 
@@ -22,7 +22,7 @@ class Admin::ExamsController < ApplicationController
     else
       flash.now[:danger] = t "exam.not_checked"
     end
-    redirect_to admin_exams_path
+    redirect_to admin_home_path
   end
 
 
@@ -31,7 +31,7 @@ class Admin::ExamsController < ApplicationController
     @exam = Exam.find_by_id params[:id]
     if @exam.nil?
       flash[:danger] = t "exam.not_found"
-      redirect_to admin_exams_path
+      redirect_to admin_home_path
     end
   end
 

@@ -18,7 +18,7 @@ class ExamsController < ApplicationController
       redirect_to exams_path
     else
       flash[:danger] = t "exam.create_error"
-      redirect_to new_exams_path
+      redirect_to root_path
     end
   end
 

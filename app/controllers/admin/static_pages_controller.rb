@@ -3,7 +3,8 @@ class Admin::StaticPagesController < ApplicationController
   before_action :load_subjects
 
   def index
-    @exams = Exam.unchecked.order updated_at: :desc
-    @suggest_questions = SuggestQuestion.unapproved.order updated_at: :desc
+    @exams = Exam.unchecked.includes(:subject).order updated_at: :desc
+    @suggest_questions = SuggestQuestion.unapproved
+      .includes(:subject).order updated_at: :desc
   end
 end

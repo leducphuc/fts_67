@@ -317,7 +317,11 @@ th{
 }
 
 #choice--true--true {
-  background: red;
+  background: #5cb85c;
+}
+
+#choice--true--false {
+  background: #d9534f;
 }
 
 .table-bordered {
@@ -327,4 +331,20 @@ th{
   -webkit-border-radius: 4px;
   -moz-border-radius: 4px;
   border-radius: 4px;
+}
+
+#correct-answer--true {
+  font-weight: bold;
+}
+
+#admin-check {
+  margin-left: 18px;
+  text-decoration: underline;
+}
+
+.question-item {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  border-left: 6px solid grey;
+  background-color: lightgrey;
 }
