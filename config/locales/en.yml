@@ -38,6 +38,7 @@ en:
   clock:
     count_down: "Remaining Time"
   exam:
+    id: "ID"
     invalid_update: "Invalid Exam!"
     create_error: "Exam has not been created!"
     not_found: "Exam Not Found!"
@@ -50,7 +51,7 @@ en:
     score: "Score"
     date: "Date"
     status: "Status"
-    admin_check: "Check this exam"
+    admin_check: "Check this question"
     checked: "Checked"
     not_checked: "Unchecked"
     created_at: "Created at"
@@ -138,3 +139,14 @@ en:
     all: "All Users"
     created_at: "Created at"
   time: "%Y/%m/%d %H:%M"
+  exam_status:
+    all: "All"
+    start: "Start"
+    testing: "Testing"
+    unchecked: "Unchecked"
+    checked: "Checked"
+  suggest_question_status:
+    unapproved: "Unapproved"
+    rejected: "Rejected"
+    approved: "Approved"
+  search: "Search"

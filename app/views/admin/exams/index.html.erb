@@ -2,6 +2,7 @@
   <table class="table sortable table-striped table-condensed">
     <thead>
       <tr>
+        <th><%= t "exam.id" %></th>
         <th><%= t "exam.subject" %></th>
         <th><%= t "exam.status" %></th>
         <th><%= t "exam.duration" %></th>
@@ -13,6 +14,7 @@
     <tbody>
       <% @exams.each do |exam| %>
         <tr>
+          <td><%= exam.id %></td>
           <td><%= link_to exam.subject.name, admin_exam_path(exam) %></td>
           <td><%= exam.status %></td>
           <td><%= Settings.duration %></td>

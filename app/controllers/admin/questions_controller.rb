@@ -1,14 +1,9 @@
 class Admin::QuestionsController < ApplicationController
   before_action :logged_in_user, :verify_admin
   before_action :find_question, except: [:new, :create, :index]
-  before_action :load_subjects, only: [:new, :edit, :show]
+  before_action :load_subjects, only: [:new, :show]
 
   def show
-  end
-
-  def index
-    @questions = Question.paginate page: params[:page],
-      per_page: Settings.questions
   end
 
   def new
