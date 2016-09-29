@@ -1,21 +1,26 @@
-<%= f.label f.object.question.content %>
-<% f.object.question.answers.each do |answer| %>
-  <div class="row">
-    <div class="col-md-2">
+<div class="question-item">
+  <%= f.label f.object.question.content %>
+  <% f.object.question.answers.each do |answer| %>
+    <div class="row">
+      <div class="col-md-2" id="choice--<%= answer == f.object.answer %>--<%=
+      f.object.answer == answer && answer.is_correct? %>">
       <%= f.check_box :answer_id, {checked: answer == f.object.answer,
-        disabled: true}, answer.id %>
+                                   disabled: true}, answer.id %>
+      </div>
+      <div class="col-md-6">
+        <span id="correct-answer--<%= answer.is_correct? %>">
+          <%= answer.content %>
+        </span>
+      </div>
     </div>
-    <div class="col-md-6">
-      <%= answer.content %>
+  <% end %>
+  <div class="row">
+    <div class="col-md-6" id="admin-check">
+      <%= t "exam.admin_check" %>
     </div>
-  </div>
-<% end %>
-<div class="row">
-  <div class="col-md-6">
-    <%= t "exam.admin_check" %>
-  </div>
-  <div class="col-md-2">
-    <%= f.check_box :is_correct,
-      {checked: f.object.answer && f.object.answer.is_correct} %>
+    <div class="col-md-2">
+      <%= f.check_box :is_correct,
+        {checked: f.object.answer && f.object.answer.is_correct} %>
+    </div>
   </div>
 </div>

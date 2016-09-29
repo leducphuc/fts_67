@@ -4,7 +4,8 @@ class Admin::SubjectsController < ApplicationController
   before_action :load_subjects, only: :index
 
   def index
-    @subject = if params[:find]
+    @subject = Subject.new
+    @subjects = if params[:find]
       Subject.search(search_params)
         .paginate page: params[:page], per_page: Settings.subjects
     else
@@ -13,6 +14,7 @@ class Admin::SubjectsController < ApplicationController
   end
 
   def show
+    @activities = @subject.activities
     @questions = if params[:find]
       @subject.questions.search(search_params)
         .paginate page: params[:page], per_page: Settings.questions

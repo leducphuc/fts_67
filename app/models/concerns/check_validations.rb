@@ -4,7 +4,7 @@ module CheckValidations extend ActiveSupport::Concern
 
     has_many :answers, as: :answerable, dependent: :destroy
 
-    validate :check_before_delete
+    validate :check_before_delete, on: :update
     validates :content, presence: true
     validate :check_correct_answer
     validates :answers, length: {minimum: Settings.minimum_answer,

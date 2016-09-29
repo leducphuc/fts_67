@@ -4,6 +4,8 @@ class Exam < ApplicationRecord
 
   has_many :choices, dependent: :destroy
 
+  validate :check_number_of_question, on: :create
+
   before_create :create_choice
 
   before_update :calculate_spent_time, if: :is_finished?
@@ -26,6 +28,12 @@ class Exam < ApplicationRecord
   end
 
   private
+  def check_number_of_question
+    if subject.questions.size < Settings.exam_questions
+      errors.add :subject, I18n.t("exam.not_enough")
+    end
+  end
+
   def create_choice
     questions = subject.questions.shuffle.take Settings.exam_questions
     questions.each do |question|

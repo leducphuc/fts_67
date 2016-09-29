@@ -37,6 +37,7 @@ en:
     confirmation: "Confirmation"
   clock:
     count_down: "Remaining Time"
+    spent_time: "Spent Time"
   exam:
     id: "ID"
     invalid_update: "Invalid Exam!"

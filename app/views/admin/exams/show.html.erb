@@ -6,8 +6,10 @@
         <%= f.fields_for :choices do |builder| %>
           <%= render "choice", f: builder %>
         <% end %>
-        <%= f.submit t("exam.submit_button"), name: "submit",
-          class: "btn btn-danger" %>
+        <% if @exam.unchecked? %>
+          <%= f.submit t("exam.submit_button"), name: "submit",
+            class: "btn btn-danger" %>
+        <% end %>
       </ol>
     <% end %>
   </div>

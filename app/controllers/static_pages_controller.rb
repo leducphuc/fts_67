@@ -3,9 +3,10 @@ class StaticPagesController < ApplicationController
   before_action :load_subjects
 
   def index
-    @exams = current_user.exams.order updated_at: :desc
+    @exams = current_user.exams.includes(:subject).order updated_at: :desc
     @exam = Exam.new
-    @suggest_questions = current_user.suggest_questions.order updated_at: :desc
+    @suggest_questions = current_user.suggest_questions.includes(:subject)
+      .order updated_at: :desc
     @suggest_question = current_user.suggest_questions.new
   end
 end

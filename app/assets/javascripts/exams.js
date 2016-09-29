@@ -36,15 +36,15 @@ if (ct_div !== null) {
   var remain_div = document.getElementById('remaining-times');
   var spent_div = document.getElementById('spent-time');
   var status_div = document.getElementById('status');
-  if(remain_div !== null) {
-    var remain = remain_div.firstChild.textContent;
-    var remaining_time = {total: parseInt(remain) + 1, minutes: 0, seconds: 0};
-    var status = status_div.firstChild.textContent;
-    initializeClock(ct_div, remaining_time, status);
-  } else if(spent_div !== null) {
-    var spent = spent_div.firstChild.textContent;
-    var spent_time = spent.firstChild.textContent;
-    var status = status_div.firstChild.textContent;
-    initializeClock(ct_div, spent_time, status);
-  }
+  remain_div.style.display = 'none';
+  spent_div.style.display = 'none';
+  status_div.style.display = 'none';
+  var remain = remain_div.firstChild.textContent;
+  var remaining_time = {total: parseInt(remain) + 1, minutes: 0, seconds: 0};
+  var status = status_div.firstChild.textContent;
+  var spent = spent_div.firstChild.textContent;
+  var spent_time = {total: parseInt(spent), minutes: 0, seconds: 0};
+  var time = status === 'testing'? remaining_time : spent_time
+
+  initializeClock(ct_div, time, status);
 }
