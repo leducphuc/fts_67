@@ -4,13 +4,18 @@
       <%= render "shared/error_messages", object: @suggest_question %>
 
       <%= render "suggest_question_fields", f: f %>
-
-      <%= f.submit t("edit.submit"), class: "btn btn-primary" %>
-
-      <%= link_to t("suggest_question.delete"),
-        suggest_question_path(@suggest_question), method: :delete,
-        data: {confirm: t("suggest_question.confirm")},
-        class: "btn btn-danger" %>
+      <div class="row">
+        <div class="col-md-6">
+          <%= link_to t("suggest_question.delete"),
+            suggest_question_path(@suggest_question), method: :delete,
+            data: {confirm: t("suggest_question.confirm")},
+            class: "btn btn-danger" %>
+        </div>
+        <div class="col-md-6">
+          <%= f.submit t("edit.submit"), class: "btn btn-primary",
+            id: "suggest-question-submit" %>
+        </div>
+      </div>
     <% end %>
   </div>
 </div>
