@@ -8,6 +8,14 @@
     </div><br />
     <div class="center"><%= link_to t("question.add"), new_admin_question_path,
       class: "btn btn-lg btn-primary" %></div>
+    <div>
+      <%= form_tag admin_subject_path, method: :get do %>
+        <p>
+          <%= text_field_tag :search, params[:search] %>
+          <%= submit_tag t(:search), name: "find" %>
+        </p>
+      <% end %>
+    </div>
   </aside>
   <div class="col-md-8">
     <h3 class="center"><%= t "question.title" %></h3>
@@ -15,22 +23,17 @@
       <thead>
         <tr>
           <th><%= t "question.content" %></th>
-          <th></th>
         </tr>
       </thead>
       <tbody>
         <% @questions.each do |question| %>
           <tr>
-            <td><%= link_to question.content %></td>
             <td>
-              <%= link_to t("delete.content"), [:admin, question],
-              method: :delete, data: {confirm: t("delete.confirm")},
-              class: "btn btn-danger btn-xs glyphicon glyphicon-remove" %>
+              <%= link_to question.content, admin_question_path(question) %>
             </td>
           </tr>
         <% end %>
       </tbody>
     </table>
-    <%= will_paginate @questions %>
   </div>
 </div>

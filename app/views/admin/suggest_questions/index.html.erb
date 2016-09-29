@@ -1,3 +1,12 @@
+<%= form_tag admin_suggest_questions_path, method: :get do %>
+  <p>
+    <%= hidden_field_tag :class_name, @class_name %>
+    <%= select_tag :subject_id, options_for_select(@subjects_select) %>
+    <%= select_tag :status, options_for_select(@status_select) %>
+    <%= text_field_tag :search, params[:search] %>
+    <%= submit_tag t(:search), name: "find" %>
+  </p>
+<% end %>
 <div class="mygrid-wrapper-div ">
   <table class="table sortable table-striped table-condensed">
     <thead>
